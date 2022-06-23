@@ -1,0 +1,133 @@
+pdf link:https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2022-06-15/10._clean_code_coupling_cohesion_modularity_dry_kiss_yagni-2_165634.pdf
+
+
+Q1.Explain what is Loose Coupling and Tight Coupling. Also show the
+examples of code having tight coupling and how you can make it loosely
+coupled.?
+Q2.What is High cohesion and how is it helpful?
+Q3 State KISS and YAGNI principle.
+
+
+1.Tight Coupling:classes and objects are dependent on one another.
+
+In general, Tight coupling means the two classes often change together. In other words, if A knows more than it should about the way in which B was implemented, then A and B are tightly coupled.Example : If you want to change the skin,you would also have to change the design of your body as well because the two are joined together – they are tightly coupled.
+The best example of tight coupling is RMI(Remote Method Invocation)
+
+i)take journey and car:
+class journey{
+    Car c=new Car();
+    void start(){
+        c.run();
+    }
+}
+
+class Car{
+    void run(){
+        //logic
+    }
+}
+ in this example if we want change bike in place of car we have to change both the class of journey and car to avoid this loose coupling comes into picture
+
+ii) volume:
+class Volume{
+    public static void main(string[] args){
+        Box b=new Box(5,5,5)
+        system.out.println(b.Volume)
+    }
+}
+class Box{
+    public int Volume
+    Box(int length,int width, int height){
+        this.Volume=length*width*height
+    }
+}
+
+output:125
+
+
+ii)Loose Coupling:Loose coupling means reducing dependencies of a class.Loose coupling promotes greater reusability.Easier maintainabilty.
+
+Vehicle(interface)--->POJI
+    i)Car(class)-->POJO
+    ii)Bike(class)--->POJO
+
+: In simple words, loose coupling means they are mostly independent. If the only knowledge that class A has
+about class B, is what class B has exposed through its interface, then class A and class B are said to be loosely coupled. In
+order to over come from the problems of tight coupling between objects, spring framework uses dependency injection
+mechanism with the help of POJO/POJI model and through dependency injection its possible to achieve loose
+coupling.Example : If you change your shirt, then you are not forced to change your body – when you can do that, then you
+have loose coupling. When you can’t do that, then you have tight coupling. The examples of Loose coupling are Interface,
+JMS.In general, Tight Coupling is bad in but most of the time, because it reduces flexibility and re-usability of code, it makes
+changes much more difficult, it impedes test ability etc. loose coupling is a better choice because A loosely coupled will help you
+when your application need to change or grow. If you design with loosely coupled architecture, only a few parts of the
+application should be affected when requirements change.
+                
+
+
+Example:
+i).journey and vechicle
+Interface Vehicle{
+    void run();
+}
+class journey{
+    Vehicle v;
+    public void setV(Vehicle v){
+        this.v=v;
+    }
+    void start(){
+        v.run();
+    }
+}
+class Car implements Vehicle{
+    public void run(){
+        //logic
+    }
+}
+class bike implements Vehicle{
+    public void run(){
+        //logic
+    }
+}
+
+here in this loose coupling if we want change some thing about particular vechicle just change that vechicle only
+
+
+ii) Topic1 and Topic2
+public interface Topic{
+    void understand();
+}
+class Topic1 implements Topic{
+    public void understand(){
+        System.out.println("Got it");
+    }
+}
+class Topic2 implements Topic{
+    public void understand(){
+        System.out.println("understand");
+    }
+}
+public class Subject{
+    public class Subject{
+        public static void main(String[] args){
+            Topic.t=new Topic1();
+            t.understand();
+        }
+    }
+}
+
+iii) volume
+class Volume{
+    public static void main(String args[]){
+           Box b = new Box(5,5,5);
+        System.out.println(b.getVolume());
+}
+}
+final class Box{
+       private int volume;
+     Box(int length, int width, int height){
+      this.volume = length * width * height;
+}
+public int getVolume(){
+   return volume;
+}
+}

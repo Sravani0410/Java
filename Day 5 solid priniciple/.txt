@@ -1,0 +1,326 @@
+Q Explain below listed principles with examples among
+SOLID principles.
+● S: Single-responsibility principle:
+
+A class should only have a single responsibility, that is, only changes to one part of the software’s specification should be able to affect the specification of the class.
+example:1
+
+//bad way to do this type of code:
+
+int binarysearch(unsorted){
+    1.logic of sort(bubble,quick,selection,merge)
+    2.binary search algo steps
+}
+
+problem which we are facing are :
+1.it might be big code
+2.we cannot use this code in another task,
+3.complexity,
+4.tight coupling,
+5.low cohension
+
+
+To solve this problem to write code in following process:To make classes or functions for each task like sorting,binary search etc.,
+
+array[] bubblesort(unsorted)
+int binarysearch(sortedarray)
+binarysearchonUnsortedArray(unsorted){
+    sortedarray=bubblesort(unsorted);
+    binarysearch(sortedarray)
+}
+
+example:2
+//bad way to write code
+
+class UserSettings{
+    constructor(user){
+        this.user=user;
+    }
+    changeSettings(settings){
+        if(this.verifyCredentials()){
+            //...
+        }
+    }
+    verifyCredentials(){
+        //...
+    }
+}
+
+
+//good way to write the code
+class UserAuth{
+    constructor(user){
+        this.user=user;
+    }
+    verifyCredentials(){
+        //...
+    }
+}
+class USerSettings{
+    constructor(user){
+        this.user=user;
+        this.auth=new UserAuth(user);
+    }
+    changeSettings(settings){
+        if(this.auth.verifyCredentials()){
+            //...
+        }
+    }
+}
+
+example:3
+
+without SRP:
+
+class Car {
+    constructor(make, model) {
+        this.make = make;
+        this.model = model;
+    }
+
+    start() {
+        if (...) { // Logic to determine whether or not the car should start
+            this.errorLog(`The car ${this.make} ${this.model} started.`);
+            return true;
+        }
+        this.errorLog(`The car ${this.make} ${this.model} failed to start.`);
+        return false;
+    }
+
+    errorLog(message) {
+        console.log(message);
+    }
+}
+
+with SRP:
+
+class ErrorLog {
+    static log(message) {
+        console.log(message);
+    }
+}
+
+class Car {
+    constructor(make, model) {
+        this.make = make;
+        this.model = model;
+    }
+
+    start() {
+        if (...) { // Logic to determine whether or not the car should start
+            ErrorLog.log(`The car ${this.make} ${this.model} started.`);
+            return true;
+        }
+        ErrorLog.log(`The car ${this.make} ${this.model} failed to start.`);
+        return false;
+    }
+}
+
+● O: Open-closed principle:
+
+Software entities, should be open for extension but closed for modification.
+
+problems are : introducing of bugs
+
+example:1
+without ocp:
+
+double area(shapes[] shape){
+    double area=0;
+    for(shapes shape:shape){
+        if(shape is rect){
+            //Rect rect=(Rect) shape
+            //cal rect area
+            area=area+circleArea
+        }
+        if(shape is circle){
+            //cal circle area
+            area=area+circleArea
+        }
+    }
+    return area;
+}
+
+problem we are facing are:
+1.cannot support new shapes
+2.debugging
+
+with ocp:write different functions for area calculate of diffrent shapes
+
+
+Interface shape{
+    double final pi=3.14;
+    double calcArea(double r)
+}
+
+class circle implement shape{
+    double calcArea(double r){
+        return pi*r*r
+    }
+}
+class cylinder implement shape{
+    double calcArea(double r){
+        return 2*pi*r*r
+    }
+}
+
+double area(shapes[] shape){
+    double area=0;
+    for(shapes shape:shape){
+        shapeArea=shape.calcArea();
+        area=area+shapeArea;
+    }
+    return area;
+}
+
+
+example:2
+
+without ocp:if we add hybrid add it will failed
+
+class Vehicle {
+    constructor(fuelCapacity, fuelEfficiency) {
+        this.fuelCapacity = fuelCapacity;
+        this.fuelEfficiency = fuelEfficiency;
+    }
+
+    getRange() {
+        return this.fuelCapacity * this.fuelEfficiency;
+    }
+}
+
+const standardVehicle = new Vehicle(10, 15);
+
+console.log(standardVehicle.getRange()); // Outputs '150'
+
+
+with ocp:
+
+class Vehicle {
+    constructor(fuelCapacity, fuelEfficiency) {
+        this.fuelCapacity = fuelCapacity;
+        this.fuelEfficiency = fuelEfficiency;
+    }
+
+    getRange() {
+        let range = this.fuelCapacity * this.fuelEfficiency;
+
+        if (this instanceof HybridVehicle) {
+            range += this.electricRange;
+        }
+        return range;
+    }
+}
+
+class HybridVehicle extends Vehicle {
+    constructor(fuelCapacity, fuelEfficiency, electricRange) {
+        super(fuelCapacity, fuelEfficiency);
+        this.electricRange = electricRange;
+    }
+}
+
+const standardVehicle = new Vehicle(10, 15);
+const hybridVehicle = new HybridVehicle(10, 15, 50);
+
+console.log(standardVehicle.getRange()); // Outputs '150'
+console.log(hybridVehicle.getRange()); // Outputs '200'
+
+
+● I: Interface segregation principle:
+
+The interface segregation principle states that an entity should never be forced to implement an interface that contains elements which it will never use
+
+
+example:1
+without ISP:
+
+worker-->permanent,temporarily
+
+interface worker{
+    name
+    email
+    monthly salary
+    hourly salary
+} 
+
+class Tempworker implements worker{
+    name
+    email
+    hourly salary
+    montly salary(){
+        throw exception("this is")
+    }
+}
+
+class Permworker implements worker{
+    name
+    email
+    montly salary
+    hourly salary(){
+        throw exception("this is")
+    }
+}
+
+probelm:
+1.DRY
+
+with ISP:
+
+interface TempSalary{
+    hourly Salary
+}
+
+interface PermSalary{
+    montly salary
+}
+
+interface Person{
+    name
+    email
+}
+
+interface StudentSalary{
+    stipend
+}
+
+class Tempworker implements TempSalary,Person{
+  name
+  email
+  hourlySalary
+}
+
+class Permworker implements PermSalary,Person{
+    name
+    email
+    montlySalary
+}
+
+class Student implements Person,StudentSalary{
+    name
+    email
+    stipend
+}
+
+
+example2:
+
+class Penguin {}
+
+class Bird {}
+
+const flyer = {
+    fly() {
+        console.log(`Flap flap, I'm flying!`);
+    },
+};
+
+Object.assign(Bird.prototype, flyer);
+
+const bird = new Bird();
+bird.fly(); 
+// Outputs 'Flap flap, I'm flying!'
+
+const penguin = new Penguin();
+penguin.fly(); 
+// 'Error: penguin.fly is not a function'
+

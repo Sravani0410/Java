@@ -1,0 +1,16 @@
+Tight coupling:
+i)classes and objects are dependent on one another i.e., commonly shared memory
+ii)The degree of coupling between should be high.
+iii)microprocessor cpu's are connected closely location to communication.
+iv)cost is high.
+v)cpu's shared the bus,memory and I/O devices.
+vi)memory conflict are happend due to shared memory.
+vii)processors are communicate with each other through shared memory.
+Loose coupling:
+i)It reduces dependencies of class.It is mostly independent i.e., distributed memory
+ii)The degree of coupling between should be low.
+iii)microprocessor cpu's are connected in different locations.
+iv)cost is low
+v)There is no such sharing.
+vi)No memory conflict are occur.
+vii)processors are communicate with each other through using message passing techinque.

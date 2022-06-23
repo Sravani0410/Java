@@ -1,0 +1,118 @@
+Q1.a)Difference between tight coupling and loose coupling.
+
+Ans:Tight coupling:
+i)classes and objects are dependent on one another i.e., commonly shared memory
+ii)Example:RMI
+iii)More interdepencency,more coordiation.
+iv)It does not have the changing capability.
+
+Loose coupling:
+i)It reduces dependencies of class.It is mostly independent i.e., distributed memory
+ii)Example:Interface,JMS
+iii)less interdepencency,more coordiation.
+iv)It has highly changeable capability.
+
+b) What is the Difference between High Cohesion and Low Cohesion? Also
+provide Examples.
+
+Ans:High Cohesion:
+i)Here we can separeate under classes different jobs.
+ii)Due to this can better usability and maintenance
+
+Low Cohesion:
+i)Here we can write under class all jobs are placed.
+ii)Due to this it is reduces the reusability and maintenance
+
+
+EXample:
+class Addition{
+    int a=10;
+    int b=2;
+     public int add(int a,int b){
+       this.a=a;
+       this.b=b;
+       return a+b;
+     }
+}
+class Display{
+    public static void main(String[] args){
+        Addition val=new Addition();
+        System.out.println(val.add(10,2));
+    }
+}
+
+
+
+
+Q2 a) Explain DRY principle and how can we achieve it
+Ans:
+DRY:"Don't Repeat Yourself", software development is aimed to reduced repition of information.And Every piece of logic must have a single,unambiguous representation withinthe system.
+
+To avoid violation of DRY principle, divide the system into pieces.Divide the code and logic into smaller reusable units and also use that code by calling it where ever we want. Don't write lengthy methods, but we have to divide the logic and try to use the exisiting piece in our methods.
+
+b) Explain the KISS principle with Example.
+Ans:KISS:Keep It Simple,Stupid
+This principle is to keep the code simplae and clean and make it easy to understand.
+After all, programming languages are for humans to understand but computers can understand only o's and 1's so keep coding the simple and straightforward.keep methos are small, for each method should never be nore than 40-50lines.Each Method should only solve one small problem not many use cases.
+example:
+public String weekday1(int day){
+    switch (day){
+        case 1:return "Monday";
+        case 2:return "Tuesday";
+        case 3:return "Wednesday";
+        case 4:return "Thursday";
+        case 5:return "Friday";
+        case 6:return "Saturday";
+        case 7:return "Sunday";
+        default: throw new InvalidOperationException("day must be in range 1 to 7");
+
+    }
+}
+public String weekday2(int day){
+   if(day<1 || day>7){
+    throw new InvalidOperationException("day must be in range 1 to 7")
+   }
+
+   string[] days={
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday"
+   };
+   return days[day-1];
+}
+
+
+Q3 What is Pessimistic Locking and Optimistic Locking?
+Ans:
+Pessimistic Locking:Unlike Pessimistic lock are not locking the data. from the time read the data to the time we cann upadate it back.
+Optimistic locking:It is a strategy where you read a record, take note of a version number or timestamps or checksums/hashes and check that version has not changed before you write the record back.
+
+
+Q4. What is a DeadLock ? And what are methods by which we can handle deadLock.
+Ans:A deadlock is a situation in which two computer programs sharing the same resource are effectively prevent each other from access the resource, resulting in both programs ceasing to function. Eariler computer OS can ran only one program at a time.Deadlock is a situation where two or more processes are waiting for each other. For example, let us assume, we have two processes P1 and P2. Now, process P1 is holding the resource R1 and is waiting for the resource R2. At the same time, the process P2 is having the resource R2 and is waiting for the resource R1.
+
+There are 4 methods to handle deadlock:
+deadlock avoidance, deadlock prevention, deadline ignorance and recovery and deadlock ignorance
+1.deadlock Ignorance
+2.deadlock prevention
+3.deadlock avoidance
+4.deadlock detection and recovery.
+
+Q5. What is a HTTP protocol?
+Ans:HTTP(Hypertext Transfer Protocol) is a protocol designed to transfer information between networked devices and runs on top of other layers of the network protocol stack.A typical flow over HTTP involves a client machine making a request to a server then it sends a response message.
+
+ Difference between HTTP and HTTPS.
+ HTTP:
+ i)HyperText Transfer Protocol
+ ii)It works on application layer
+ iii)Here the port number is 80
+ iv)here no encryption is present
+ HTTPS:
+ i)HyperText Transfer Protocol Secure
+ ii) It works on transport layer
+ iii)Here the port number is 443
+ iv) here both encryption and decryption are present.

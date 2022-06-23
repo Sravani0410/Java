@@ -1,0 +1,66 @@
+Q.1 Explain what HTTP is and how it is Unidirectional?
+Ans:Stands for "Hypertext Transfer Protocol." HTTP is the protocol used to transfer data
+over the web. It is part of the Internet protocol suite and defines commands and
+services used for transmitting webpage data. HTTP uses a server-client model. A client,
+for example, may be a home computer, laptop, or mobile device.
+The HTTP server is typically a web host running web server software, such as
+Apacheor IIS. When you access a website, your browser sends a request to the
+corresponding web server and it responds with an HTTP status code. If the URL is valid
+and the connection is granted, the server will send your browser the webpage and
+related files.
+Some common HTTP status codes include:
+1. 200 - successful request (the webpage exists)
+2. 401 - unauthorized request (authorization required)
+3. 500 - internal server error (often caused by an incorrect server configuration)
+NOTE: URLs that begin with "http://" are accessed over the standard hypertext transfer
+protocol and use port 80 by default.
+URLs that start with "https://" are accessed over a secure HTTPS connection and often
+use port 443.
+
+Q.2 What is IPv4 and IPv6
+Ans:IPv4:IPv4 is a version 4 of IP. It is a current version and the most commonly used IP address.
+It is a 32-bit address written in four numbers separated by 'dot', i.e., periods. This
+address is unique for each device.For example, 66.94.29.13
+The above example represents the IP address in which each group of numbers
+separated by periods is called an Octet. Each number in an octet is in the range from 0-
+255. This address can produce 4,294,967,296 possible unique addresses.
+Drawback of IPv4
+Currently, the population of the world is 7.6 billion. Every user is having more than one
+device connected with the internet, and private companies also rely on the internet. As
+we know that IPv4 produces 4 billion addresses, which are not enough for each device
+connected to the internet on a planet.
+
+IPv6:IPv6 is the next generation of IP addresses. The main difference between IPv4 and
+IPv6 is the address size of IP addresses. The IPv4 is a 32-bit address, whereas IPv6 is
+a 128-bit hexadecimal address.IPv6 provides a large address space, and it contains a
+simple header as compared to IPv4.
+This hexadecimal address contains both numbers and alphabets. Due to the usage of
+both the numbers and alphabets, IPv6 is capable of producing over 340 undecillion
+addresses. IPv6 is a 128-bit hexadecimal address made up of 8 sets of 16 bits each,
+and these 8 sets are separated by a colon.
+
+Q.3 What is DNS?
+Ans:The Domain Name System (DNS) is the phonebook of the Internet. Humans access
+information online through domain names, like nytimes.com or espn.com. Web
+browsers interact through Internet Protocol (IP) addresses. DNS translates domain
+names to IP addresses so browsers can load Internet resources.Each device
+connected to the Internet has a unique IP address which other machines use to find
+the device. DNS servers eliminate the need for humans to memorize IP addresses
+such as 192.168.1.1 (in IPv4), or more complex newer alphanumeric IP addresses
+such as 2400:cb00:2048:1::c629:d7a2 (in IPv6)
+
+
+Q.4 Explain what CDN is ?
+Ans:The Domain Name System (DNS) is the phonebook of the Internet. Humans access
+information online through domain names, like nytimes.com or espn.com. Web
+browsers interact through Internet Protocol (IP) addresses. DNS translates domain
+names to IP addresses so browsers can load Internet resources.Each device
+connected to the Internet has a unique IP address which other machines use to find
+the device. DNS servers eliminate the need for humans to memorize IP addresses
+such as 192.168.1.1 (in IPv4), or more complex newer alphanumeric IP addresses
+such as 2400:cb00:2048:1::c629:d7a2 (in IPv6)
+
+Q.5 What is a DeadLock?
+Ans:A deadlock is a situation in which two computer programs sharing the same resource are effectively preventing each other from accessing the resource, resulting in both programs ceasing to function. The earliest computer operating systems ran only one program at a time.
+
+Deadlock is a situation where two or more processes are waiting for each other. For example, let us assume, we have two processes P1 and P2. Now, process P1 is holding the resource R1 and is waiting for the resource R2. At the same time, the process P2 is having the resource R2 and is waiting for the resource R1.
