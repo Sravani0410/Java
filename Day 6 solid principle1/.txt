@@ -30,5 +30,88 @@ code for their body.
 No need to completely implement any algorithm, just print “Array is sorted using
 YOUR_ALGO”.
 
+solution:
+Interface sortedarray{
+    sort()
+}
+class bubblesort implements sortedarray{
+    sort(){
+        "Array sorted using bubble sort
+    }
+}
+class selectionsort implements sortedarray{
+    sort(){
+      "Array sorted using selection sort  
+    }
+}
+class anothersort implements sortedarray{
+    sort(){
+      "Array sorted using other sort  
+    }
+}
+class binarysearch{
+    binary{
+        sortedarray SA=new sortedarray()
+        SA.sort()
+        binarysearch
+    }
+}
 
 Q2. Explain the Liscov’s Substitution and dependency Inversion principle with an example..
+
+Liscov’s Substitution principle:object should be replaceable by their subtype without altering the correctness.child classes must be substitutable for their base or parent classes
+public class liskosubprinciple{
+    public static void main(string[] args){
+        Bird bird=new Bird();
+        Eagle eagle=new Eagle();
+        Ostrich ostrich=new Ostrich();
+        flymethod(eagle);
+
+    }
+    static void flymethod(FlyingBird flyingbird){
+        flyingBird.fly();
+    }
+}
+class Bird{
+
+}
+class FlyingBird{
+    void fly(){
+        System.out.println("bird flying....")
+    }
+}
+class NonFlyingBird{
+
+}
+class Eagle extends FlyingBird{
+
+}
+class Ostrich extends NonFlyingBird{
+
+}
+
+
+dependency Inversion principle(DIP):
+1.high level modules should not depend on low level modules
+2.abstraction should not dependent on implement
+
+interface genericEmailservice{
+    sendEmail();
+}
+class YahooEmailService implements genericEmailservice{
+    sendEmail(){
+        "Yahoo email send logic"
+    }
+}
+class GoogleEmailService implements genericEmailservice{
+    sendEmail(){
+       "Google email send logic"
+    }
+}
+class signupService{
+    signup{
+        createaccount
+        genericEmailservice ges=new genericEmailservice
+        ges.sendEmail()
+    }
+}

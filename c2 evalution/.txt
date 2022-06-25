@@ -1,0 +1,295 @@
+Q1 a) What do you know about client server architecture?
+
+Ans:Client server is computing 2 two basic components:
+Client is the one request the informantion from e.g:web browser,mobile app IoT devices
+Server is the one supplies the information requested to client through e.g: Application server,DB server, Rest endpoint.
+The client requests a service to be performed. This service might be run an application-->query a data base-->print a document/even perform a backup.recovery procedure.
+server are typically though of as cloud computing network, however server can be another personal compute on the network.
+
+
+b)What is the difference between DNS and IP address?
+
+DNS:Domain Name system(DNS) is just like a phonebook of the internet.there human can acess the information online through domain names like espn.com.Here web browsers interact through IP addresses. DNS can translates domain names to IP addresses that can browser can load internet resources. and each devices are connected to the nternet has unquie IP addresses which other machinces can also find devices.DNS servers can eliminate the need for humans to memorize IP address such as IPv4(numerical) format or IPv6(Alphanumerical) format.
+
+IP:IP stands for Internet Protocol.It is a model used to send the packets from source to destination based on the IP addresses available in packet headers.This packet structure is to hide the data which is deliverd as well as the addressing method that labels with source and destination information.
+
+Q2.  What is CAP theorem, discuss a scenario where CAP theorem helps you choose a technology over the other or helps you make a design decision.
+
+Ans:It has three components:
+C-Consistency:All nodes can see the same data at same time
+A-Availability:It is guarantee that every request receives a response about that whether it was success or failed.
+P:Partition tolerance:The system continues to operate message loss or failure of a part of the system.
+
+In this therom,partition tolerance is must.the system operates oon distributed data store so teh system can operates with network partitions.Network failures will happened so that it can offer any kind of reliable service,so it is necessary 
+
+The other 2 can choose depends upon,i.e.,C and A. when a network failure one can choose Consistency or Availability
+
+High Consistency comes at the cost of lower Availability
+High Availability comes at the cost of lower Consistency
+
+choosing consistency and availablity comes when choosing which database type such as SQL Vs NoSQL.
+NoSQL databases can classified based on whether they support high availability or high consistency.
+
+NoSQL:database are mainly MongoDB,cloudDB....
+
+consistency in database:
+
+It is mainly used when the value of the information returned needs to be accurate.
+example:Bannk account balances:when user login to their banking, they do not want to see error that no data is returned. Banking apps should be return the exact values of the user's account information.In that cases banks can be on consistency database.
+
+availablity in database:
+It is used when the service is more important than the information.
+
+example:It can be seen in e-commerence. online stores wants to make their store and the functions of the shopping cart available in 24/7 so clients can purchase exactly when they need
+
+Database are used:Cassandra,DynamoDB...
+
+Q3 What are SOLID principles? Explain with examples wherever possible.
+ S: Single-responsibility principle(SRP)
+ O: Open-closed principle(OCP)
+ L: Liscov’s Substitution principle(LSP)
+ I: Interface segregation principle(ISP)
+ D: Dependency Inversion principle(DIP)
+
+ S: Single-responsibility principle(SRP):
+
+ A class should only have a single responsibility,it has only changes to one part of the software’s specification should be able to affect the specification of the class.
+
+example:
+class UserAuth{
+    constructor(user){
+        this.user=user;
+    }
+    verifyCredentials(){
+      //write code...
+    }
+}
+class UserSettings{
+    constructor(user){
+        this.user=user;
+        this.auth=new UserAuth(user);
+    }
+    changeSettings(settings){
+        if(this.auth.verifyCredentials()){
+         // write code
+        }
+    }
+}
+
+ O: Open-closed principle(OCP):
+
+Software entities, should be open for extension but closed for modification.
+example:
+
+Interface shape{
+    double final pi=3.14;
+    double calcArea(double r)
+}
+
+class circle implement shape{
+    double calcArea(double r){
+        return pi*r*r
+    }
+}
+class cylinder implement shape{
+    double calcArea(double r){
+        return 2*pi*r*r
+    }
+}
+
+double area(shapes[] shape){
+    double area=0;
+    for(shapes shape:shape){
+        shapeArea=shape.calcArea();
+        area=area+shapeArea;
+    }
+    return area;
+}
+
+ L: Liscov’s Substitution principle(LSP)
+
+object should be replaceable by their subtype without altering the correctness.child classes must be substitutable for their base or parent classes
+
+example:
+
+public class liskosubprinciple{
+    public static void main(string[] args){
+        Bird bird=new Bird();
+        Eagle eagle=new Eagle();
+        Ostrich ostrich=new Ostrich();
+        flymethod(eagle);
+
+    }
+    static void flymethod(FlyingBird flyingbird){
+        flyingBird.fly();
+    }
+}
+class Bird{
+
+}
+class FlyingBird{
+    void fly(){
+        System.out.println("bird flying....")
+    }
+}
+class NonFlyingBird{
+
+}
+class Eagle extends FlyingBird{
+
+}
+class Ostrich extends NonFlyingBird{
+
+}
+
+ I: Interface segregation principle(ISP):
+
+ The interface segregation principle states that an entity should never be forced to implement an interface that contains elements which it will never use
+
+ example:
+ interface TempSalary{
+    hourly Salary
+}
+
+interface PermSalary{
+    montly salary
+}
+
+interface Person{
+    name
+    email
+}
+
+interface StudentSalary{
+    stipend
+}
+
+class Tempworker implements TempSalary,Person{
+  name
+  email
+  hourlySalary
+}
+
+class Permworker implements PermSalary,Person{
+    name
+    email
+    montlySalary
+}
+
+class Student implements Person,StudentSalary{
+    name
+    email
+    stipend
+}
+
+D: Dependency Inversion principle(DIP):
+
+1.high level modules should not depend on low level modules
+2.abstraction should not dependent on implement
+
+example:
+
+interface genericEmailservice{
+    sendEmail();
+}
+class YahooEmailService implements genericEmailservice{
+    sendEmail(){
+        "Yahoo email send logic"
+    }
+}
+class GoogleEmailService implements genericEmailservice{
+    sendEmail(){
+       "Google email send logic"
+    }
+}
+class signupService{
+    signup{
+        createaccount
+        genericEmailservice ges=new genericEmailservice
+        ges.sendEmail()
+    }
+}
+
+
+
+Q4 In the following diagram (it intentionally contains pseudo code) There is an
+interface DataManager with two functions.
+The three classes implement this interface and provide implementation to the
+read and write methods.
+The write method throws an exception in the InMemoryRealmManager class
+because it doesn’t need the write() method.
+A. Which of the design principles: solid principles or clean code pattern is
+being violated in this scenario.
+B. Rectify/fix it with the best practices and also demonstrate the corresponding
+pseudo code.
+
+protocol DataManager{
+    func read()
+    func write()
+}
+class DiskRealmManager:DataManager{
+    func read(){
+        print("Reading DiskRealmManger")
+    }
+    func write(){
+        print("Saving Into Realm")
+    }
+}
+class DiskCoreDataManager:DataManager{
+    func read(){
+        print("Reading DiskCoreDataManager")
+    }
+    func write(){
+        print("Saving Into Core")
+    }
+}
+
+class InMemoryRealmManager:DataManager{
+    func read(){
+        print("Reading InMemoryRealmManager")
+    }
+    func write(){
+       fatalError()
+    }
+}
+
+solution :
+
+A)Dependency Inversion principle(DIP):
+B)
+
+interface GenericDataManager{
+    read();
+    write();
+}
+class DiskRealmManager implements GenericDataManager{
+    read(){
+        print("Reading DiskRealmManger")
+    }
+     write(){
+        print("Saving Into Realm")
+    }
+}
+class DiskCoreDataManager implements GenericDataManager{
+     read(){
+        print("Reading DiskCoreDataManager")
+    }
+    write(){
+        print("Saving Into Core")
+    }
+}
+class InMemoryRealmManager implements GenericDataManager{
+    read(){
+        print("Reading InMemoryRealmManager")
+    }
+     write(){
+       fatalError()
+    }
+}
+class Datamanger{
+    data{
+        GenericDataManager GDM=new GenericDataManager
+        GDM.read()
+
+    }
+}
